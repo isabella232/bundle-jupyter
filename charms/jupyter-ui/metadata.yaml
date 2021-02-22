@@ -10,7 +10,8 @@ resources:
     type: oci-image
     description: 'Backing OCI image'
     auto-fetch: true
-    upstream-source: gcr.io/kubeflow-images-public/jupyter-web-app:vmaster-ge4456300
+    # upstream-source: gcr.io/kubeflow-images-public/jupyter-web-app:vmaster-ge4456300
+    upstream-source: rocks.canonical.com:5000/kubeflow/jupyter-ui:latest
 requires:
   service-mesh:
     interface: service-mesh

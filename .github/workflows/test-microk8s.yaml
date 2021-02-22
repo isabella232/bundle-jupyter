@@ -35,18 +35,15 @@ jobs:
         juju bundle deploy --build
         juju wait -wvt 300
 
-    - name: Test Jupyter
+    - name: Test kubeflow
       run: |
         set -eux
-        kubectl run \
-            --rm \
-            -i \
-            --restart=Never \
-            --image=ubuntu \
-            jupyter-check \
-            -- \
-            bash -c "apt update && apt install -y curl && curl -f http://jupyter-ui.jupyter.svc.cluster.local:8080/"
+        export JUJU_DATA=/var/snap/microk8s/current/juju/share/juju
+        sudo apt update
+        sudo apt install -y firefox-geckodriver
+        sudo pip3 install -r test-requirements.txt
 
+        pytest -vvs
 
     - name: Get pod statuses
       run: kubectl get all -A
